@@ -73,41 +73,27 @@ res.then(res => {
 //   console.error(e)
 // })
 
-function getContent(filename){
+function getContent(filename) {
   const fileUrl = `http://localhost:8081/downloadText/${filename}`
-          const getContent = fetch(fileUrl)
-          getContent.then(res => {
-            if(res.ok) {
-              return res.text()
-            }
-          }).then(content => {
-            document.querySelector("#text").innerText = content
-          })
+  const getContent = fetch(fileUrl)
+  getContent.then(res => {
+    if (res.ok) {
+      return res.text()
+    }
+  }).then(content => {
+    document.querySelector("#text").innerText = content
+  })
 }
 
-function getImage(filename){
+function getImage(filename) {
   const fileUrl = `http://localhost:8081/downloadText/${filename}`
-          // const getContent = fetch(fileUrl)
-          // getContent.then(res => {
-          //   if(res.ok) {
-          //     return res.blob()
-          //   }
-          // }).then(image => {
-          //   let url = URL.createObjectURL(image)
-            document.querySelector("#img").src = fileUrl
-          // })
+
+  document.querySelector("#img").src = fileUrl
 }
 
-function getVideo(filename){
+function getVideo(filename) {
   const fileUrl = `http://localhost:8081/downloadText/${filename}`
-          // const getContent = fetch(fileUrl)
-          // getContent.then(res => {
-          //   if(res.ok) {
-          //     return res.blob()
-          //   }
-          // }).then(video => {
-          //   let url = URL.createObjectURL(video)
-            document.querySelector("#video").src = fileUrl
-            document.querySelector("#video").type= "video/mp4"
-          // })
+
+  document.querySelector("#video").src = fileUrl
+  document.querySelector("#video").type = "video/mp4"
 }
