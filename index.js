@@ -25,23 +25,28 @@ res.then(res => {
       switch (true) {
         case filename.endsWith('.txt'): {
           getContent(filename)
+          break
         }
         // Nếu là JSON, thì format lại rồi mới show ra...!
         case filename.endsWith('.json'): {
-          // TODO: ...?
-          // break
+          getJSON(filename)
+          break
         }
         case filename.endsWith('.jpg'): {
           getImage(filename)
+          break
         }
         // Show video bằng thẻ video
         case filename.endsWith('.mp4'): {
           getVideo(filename)
+          break
         }
         // Show audio bằng thẻ audio hay gì đó a cuên r
-        // default:
-        //   // Đây là TH ếu mở được file
-        //   canBeOpened = false
+        // case filename.endsWith('.mp4'): {
+        //   getAudio(filename)
+        // }
+        default:
+          canBeOpened = false
       }
 
       if (canBeOpened) {
@@ -96,4 +101,23 @@ function getVideo(filename) {
 
   document.querySelector("#video").src = fileUrl
   document.querySelector("#video").type = "video/mp4"
+}
+
+function getAudio(filename) {
+  const fileUrl = `http://localhost:8081/downloadText/${filename}`
+
+  document.querySelector("#audio").src = fileUrl
+  document.querySelector("#audio").type = "audio/ogg"
+}
+
+function getJSON(filename) {
+  const fileUrl = `http://localhost:8081/downloadText/${filename}`
+  const getContent = fetch(fileUrl)
+  getContent.then(res => {
+    if (res.ok) {
+      return res.json()
+    }
+  }).then(content => {
+    document.querySelector("#text").innerText = content
+  })
 }
