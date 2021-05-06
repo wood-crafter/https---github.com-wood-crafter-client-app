@@ -18,7 +18,6 @@ res.then(res => {
 
     document.querySelector("#getTexts").appendChild(a)
 
-    // ? Now, for the fun part...! <3
     a.addEventListener('click', (e) => {
       let canBeOpened = true
 
@@ -27,7 +26,6 @@ res.then(res => {
           getContent(filename)
           break
         }
-        // Nếu là JSON, thì format lại rồi mới show ra...!
         case filename.endsWith('.json'): {
           getJSON(filename)
           break
@@ -36,12 +34,10 @@ res.then(res => {
           getImage(filename)
           break
         }
-        // Show video bằng thẻ video
         case filename.endsWith('.mp4'): {
           getVideo(filename)
           break
         }
-        // Show audio bằng thẻ audio hay gì đó a cuên r
         // case filename.endsWith('.mp4'): {
         //   getAudio(filename)
         // }
@@ -50,7 +46,6 @@ res.then(res => {
       }
 
       if (canBeOpened) {
-        // Nếu mở được file, dí đb download
         e.preventDefault()
       }
     })
@@ -58,25 +53,6 @@ res.then(res => {
 }).catch(e => {
   console.error(e)
 })
-
-// song.then(res => {
-//   if (res.ok) {
-//     return res.json()
-//   }
-// }).then(files => {
-//   files.forEach(filename => {
-//     const a = document.createElement('a')
-//     const fileUrl = `http://localhost:8081/downloadSong/${filename}`
-
-//     a.href = fileUrl
-//     a.download = filename
-//     a.innerText = filename
-
-//     document.querySelector("#getSongs").appendChild(a)
-//   })
-// }).catch(e => {
-//   console.error(e)
-// })
 
 function getContent(filename) {
   const fileUrl = `http://localhost:8081/downloadText/${filename}`
