@@ -26,6 +26,7 @@ res.then(res => {
           getContent(filename)
           break
         }
+//TODO- Format JSON file
         case filename.endsWith('.json'): {
           getJSON(filename)
           break
@@ -38,9 +39,10 @@ res.then(res => {
           getVideo(filename)
           break
         }
-        // case filename.endsWith('.mp4'): {
-        //   getAudio(filename)
-        // }
+        case filename.endsWith('.mp3'): {
+          getAudio(filename)
+          break
+        }
         default:
           canBeOpened = false
       }
