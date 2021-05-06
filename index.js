@@ -1,5 +1,6 @@
-const res = fetch('http://localhost:8081/texts')
-const song = fetch('http://localhost:8081/mp4')
+const API_ROOT = 'http://localhost:8081'
+const res = fetch(`${API_ROOT}/texts`)
+const song = fetch(`${API_ROOT}/mp4`)
 
 res.then(res => {
   if (res.ok) {
@@ -8,7 +9,7 @@ res.then(res => {
 }).then(files => {
   files.forEach(filename => {
     const a = document.createElement('a')
-    const fileUrl = `http://localhost:8081/downloadText/${filename}`
+    const fileUrl = `${API_ROOT}/download/${filename}`
 
     a.href = fileUrl
     a.download = filename
@@ -28,7 +29,7 @@ res.then(res => {
         }
 //TODO- Format JSON file
         case filename.endsWith('.json'): {
-          getJSON(filename)
+          displayJSON(filename)
           break
         }
         case filename.endsWith('.jpg'): {
@@ -57,7 +58,7 @@ res.then(res => {
 })
 
 function getContent(filename) {
-  const fileUrl = `http://localhost:8081/downloadText/${filename}`
+  const fileUrl = `${API_ROOT}/download/${filename}`
   const getContent = fetch(fileUrl)
   getContent.then(res => {
     if (res.ok) {
@@ -69,27 +70,27 @@ function getContent(filename) {
 }
 
 function getImage(filename) {
-  const fileUrl = `http://localhost:8081/downloadText/${filename}`
+  const fileUrl = `${API_ROOT}/download/${filename}`
 
   document.querySelector("#img").src = fileUrl
 }
 
 function getVideo(filename) {
-  const fileUrl = `http://localhost:8081/downloadText/${filename}`
+  const fileUrl = `${API_ROOT}/download/${filename}`
 
   document.querySelector("#video").src = fileUrl
   document.querySelector("#video").type = "video/mp4"
 }
 
 function getAudio(filename) {
-  const fileUrl = `http://localhost:8081/downloadText/${filename}`
+  const fileUrl = `${API_ROOT}/download/${filename}`
 
   document.querySelector("#audio").src = fileUrl
   document.querySelector("#audio").type = "audio/ogg"
 }
 
-function getJSON(filename) {
-  const fileUrl = `http://localhost:8081/downloadText/${filename}`
+function displayJSON(filename) {
+  const fileUrl = `${API_ROOT}/download/${filename}`
   const getContent = fetch(fileUrl)
   getContent.then(res => {
     if (res.ok) {
